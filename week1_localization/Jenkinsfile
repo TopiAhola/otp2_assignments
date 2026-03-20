@@ -76,6 +76,16 @@ pipeline {
             }
         } */
 
+
+        stage('Package .jar') {
+            steps {
+                bat '''
+                cd ./week1_localization
+                 mvn package
+                 '''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 //build from dockerfile
