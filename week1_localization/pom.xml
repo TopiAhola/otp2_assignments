@@ -14,4 +14,109 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!--Junit testing dependency -->
+        <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter</artifactId>
+          <version>5.13.4</version>
+          <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+    <!-- Set the final jar name to Server-<version>.jar so Dockerfile can find /target/Server-<version>.jar -->
+    <finalName>${project.artifactId}-${project.version}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+
+      <!-- maven compiler plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+
+      <!-- JAR Plugin for configuring the manifest file -->
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-jar-plugin</artifactId>
+           <version>3.4.2</version>
+           <configuration>
+               <archive>
+                   <manifest>
+                       <!-- Correct main class, huomaa package!! -->
+                       <mainClass>Main</mainClass>
+                   </manifest>
+               </archive>
+           </configuration>
+       </plugin>
+
+      <!-- Upgrade Jacoco to add support for newer Java classfile versions -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.11</version>
+         <executions>
+           <execution>
+             <goals>
+               <goal>prepare-agent</goal>
+             </goals>
+           </execution>
+           <execution>
+             <id>report</id>
+             <goals>
+               <goal>report</goal>
+             </goals>
+             <phase>verify</phase>
+           </execution>
+         </executions>
+         <configuration>
+           <skip>false</skip>
+            <excludes>
+              <exclude>sun/util/resources/**</exclude>
+              <exclude>sun/util/cldr/**</exclude>
+              <exclude>sun/util/resources/provider/LocaleDataProvider</exclude>
+              <exclude>sun/text/resources/cldr/ext/FormatData_fi</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.3</version>
+        <configuration>
+          <release>21</release>
+          <doclint>none</doclint>
+          <show>public</show>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+
 </project>
