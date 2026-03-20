@@ -11,12 +11,12 @@ pipeline {
         DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
         DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
         DOCKER_IMAGE_TAG = "week1_localization"
-
+        PATH_TO_DOCKER_EXE = "path_to_docker_exe"
     }
 
     stages {
 /*
-         //use ssh type uri and credentials (normal URL: 'https://github.com/Quuikz/OTP')
+
          stage('Checkout with SSH') {
             steps {
                 git branch: 'main', url: 'git@github.com:/Quuikz/OTP.git', credentialsId:'ssh TopiAhola'
@@ -67,6 +67,12 @@ pipeline {
         stage('Publish Coverage Report with Jacoco plugin') {
             steps {
                 jacoco()
+            }
+        }
+
+        stage('Start Docker') {
+            steps {
+                bat "${PATH_TO_DOCKER_EXE}"
             }
         }
 
