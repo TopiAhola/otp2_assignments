@@ -78,22 +78,9 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                //build from dockerfile in server
+                //build from dockerfile
                 script {
                     dir ('./week1_localization/') {
-                        //name repo:otp:server
-                        docker.build("${DOCKERHUB_REPO}:")
-                    }
-                }
-            }
-        }
-
-        stage('Build Docker Image for APPLICATION') {
-            steps {
-                //build from dockerfile in application
-                script {
-                    dir ('./application/') {
-                        //name repo:otp_application
                         docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                     }
                 }
@@ -110,8 +97,6 @@ pipeline {
                 }
             }
         }
-
-
 
     }
 }
