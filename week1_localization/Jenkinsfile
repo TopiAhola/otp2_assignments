@@ -70,11 +70,11 @@ pipeline {
             }
         }
 
-        stage('Start Docker') {
+/*         stage('Start Docker') {
             steps {
                 bat "${PATH_TO_DOCKER_EXE}"
             }
-        }
+        } */
 
         stage('Build Docker Image') {
             steps {
