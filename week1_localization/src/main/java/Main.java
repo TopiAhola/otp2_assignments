@@ -26,7 +26,6 @@ public class Main {
         Menu menu = new Menu(input, bundles, shoppingCart);
 
         //run menu
-        System.out.println(english.getString("introText"));
         boolean run = true;
         while(run) {
                 run = menu.runState();

@@ -14,7 +14,7 @@ public class Menu {
         this.scanner = input;
         this.bundles = bundles;
         currentBundle = bundles[0];
-        currentState = languageMenu;
+        currentState = startState;
         this.shoppingCart = shoppingCart;
         this.exitWords = new ArrayList<>();
         for(ResourceBundle rb : bundles){
@@ -42,6 +42,30 @@ public class Menu {
     interface MenuState{
         public boolean execute();
     }
+
+    MenuState startState = ()->{
+        System.out.println(currentBundle.getString("introText1"));
+        String line = scanner.nextLine().trim().toLowerCase();
+        //System.out.println("Input: " + line);
+        if(exitWords.contains(line)){
+            return false;
+        }
+
+        switch(line){
+            case "1": {currentBundle = bundles[0];} break;
+            case "2": {currentBundle = bundles[1];} break;
+            case "3": {currentBundle = bundles[2];} break;
+            case "4": {currentBundle = bundles[3];} break;
+        }
+
+        System.out.println(currentBundle.getString("introText2"));
+        //return to main menu
+        currentState = menuStates[0];
+
+        return true;
+
+    };
+
 
     /// //////////////////////////////////////////////////////
     MenuState baseMenu = ()->{
