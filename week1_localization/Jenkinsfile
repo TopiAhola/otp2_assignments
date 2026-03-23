@@ -71,11 +71,11 @@ pipeline {
             }
         }
 
-         stage('Start Docker') {
+/*          stage('Start Docker') {
             steps {
                 bat """start  "${PATH_TO_DOCKER_EXE}" """
             }
-        }
+        } */
 
 
         stage('Package .jar') {
