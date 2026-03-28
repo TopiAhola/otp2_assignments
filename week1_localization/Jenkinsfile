@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     tools {
-        maven 'PaikallinenMaven'
-        git 'Default'
+        maven 'Maven'
+        git 'Git'
+        //docker 'Docker'
     }
 
     environment {
@@ -11,7 +12,7 @@ pipeline {
         DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
         DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
         DOCKER_IMAGE_TAG = "week1_localization"
-        PATH_TO_DOCKER_EXE = "path_to_docker_exe"
+        //PATH_TO_DOCKER_EXE = "path_to_docker_exe"
     }
 
     stages {
@@ -70,9 +71,9 @@ pipeline {
             }
         }
 
-/*         stage('Start Docker') {
+/*          stage('Start Docker') {
             steps {
-                bat "${PATH_TO_DOCKER_EXE}"
+                bat """start  "${PATH_TO_DOCKER_EXE}" """
             }
         } */
 
