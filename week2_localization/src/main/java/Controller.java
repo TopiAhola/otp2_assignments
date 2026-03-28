@@ -50,8 +50,8 @@ public class Controller {
     ResourceBundle currentBundle;
     ResourceBundle[] bundles;
 
-    //reference to window
-    Stage stage;
+    //reference to Calculator
+    Calculator calculator;
 
     @FXML
     public void initialize(){
@@ -73,6 +73,9 @@ public class Controller {
         currentBundle = english;
         root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+
+        //make the calculator
+        calculator = new Calculator();
 
         //load text
         loadLanguageStrings();
@@ -99,11 +102,30 @@ public class Controller {
             loadLanguageStrings();
         });
 
+        //function for calculate button
+        btnCalculate.setOnAction(e -> {
+          try {
+              double distance = Double.parseDouble(txtDistance.getText().trim());
+              double consumption =  Double.parseDouble(txtConsumption.getText().trim());
+              double price = Double.parseDouble(txtPrice.getText().trim());
+
+              System.out.println(distance + " " + consumption + " " + price);
+
+              lblResultText.setText(
+                      String.format("%.02fl %.02f" ,
+                      calculator.calculateConsumption(distance,consumption),
+                      calculator.calculateCost(distance,consumption, price)
+                      )
+              );
+
+          } catch (Exception ex) {
+              ex.printStackTrace();
+              lblResultText.setText(currentBundle.getString("errorMessage"));
+          }
+        });
+
     }
 
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
 
     protected void loadLanguageStrings(){
         titleLabel.setText(currentBundle.getString("titleLabel"));
