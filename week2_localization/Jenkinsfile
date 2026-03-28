@@ -1,0 +1,86 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'PaikallinenMaven'
+        git 'Default'
+    }
+
+    environment {
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
+        DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
+        DOCKER_IMAGE_TAG = "week2_localization"
+        PATH_TO_DOCKER_EXE = "path_to_docker_exe"
+    }
+
+    stages {
+         stage('Checkout with git tool') {
+            steps {
+                git 'https://github.com/TopiAhola/otp2_assignments.git'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                bat '''
+                cd ./week1_localization
+                mvn clean test
+                '''
+            }
+        }
+
+        stage('Code Coverage') {
+            steps {
+                bat '''
+                cd ./week1_localization
+                 mvn jacoco:report
+                 '''
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                junit '*/target/surefire-reports/*.xml'
+            }
+        }
+
+        stage('Publish Coverage Report with Jacoco plugin') {
+            steps {
+                jacoco()
+            }
+        }
+
+        stage('Package .jar') {
+            steps {
+                bat '''
+                cd ./week1_localization
+                 mvn package
+                 '''
+            }
+        }
+
+        stage('Build Docker Image with .jar') {
+            steps {
+                //build from dockerfile
+                script {
+                    dir ('./week1_localization/') {
+                        docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    }
+                }
+            }
+        }
+
+        //docker push topiahola/jenkins_docker_repo:${DOCKER_IMAGE_TAG}
+         stage ('push docker image to dockerhub'){
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    }
+                }
+            }
+        }
+
+    }
+}
