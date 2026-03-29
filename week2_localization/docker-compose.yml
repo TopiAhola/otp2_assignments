@@ -8,6 +8,7 @@ services:
       #for Xming display output
       DISPLAY: host.docker.internal:0
 
+
     volumes:
      - /tmp/.X11-unix:/tmp/.X11-unix  #remove this?
 

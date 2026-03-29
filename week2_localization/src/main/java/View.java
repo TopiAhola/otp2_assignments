@@ -16,6 +16,7 @@ public class View extends Application {
         stage.setScene(new Scene(root));
         stage.setMinWidth(300);
         stage.setMinHeight(500);
+        stage.setTitle("TripCalc");
 
         stage.show();
     }

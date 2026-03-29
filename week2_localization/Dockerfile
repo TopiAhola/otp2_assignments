@@ -10,6 +10,28 @@ COPY . .
 # display for Xming   // ENV DISPLAY=host.docker.internal:0.0
 ENV DISPLAY=host.docker.internal:0
 
+#try installing japanese fonts
+RUN apt-get update && \
+apt-get install -y \
+fonts-liberation \
+fonts-dejavu-core \
+fonts-noto-core \
+fonts-noto-cjk \
+fontconfig \
+libfreetype6 \
+locales \
+&& locale-gen ja_JP.UTF-8 \
+&& rm -rf /var/lib/apt/lists/*
+
+#rebuild font cache
+RUN fc-cache -fv
+
+#try setting language as japanese
+#ENV LANG=ja_JP.UTF-8
+#ENV LC_ALL=ja_JP.UTF-8
+
+
+
 #Install dependencies for GUI + Maven build
 RUN apt-get update && \
     apt-get install -y maven wget unzip libgtk-3-0 libgbm1 libx11-6 && \
@@ -19,6 +41,7 @@ RUN apt-get update && \
 RUN wget https://download2.gluonhq.com/openjfx/21/openjfx-21_linux-x64_bin-sdk.zip -O /tmp/openjfx.zip && \
     unzip /tmp/openjfx.zip -d /opt && \
     rm /tmp/openjfx.zip
+
 
 
 RUN mvn dependency:resolve

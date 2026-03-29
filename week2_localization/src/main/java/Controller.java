@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -146,11 +147,37 @@ public class Controller {
         txtPrice.setPromptText(currentBundle.getString("txtPrice"));
         lblResultText.setPromptText(currentBundle.getString("lblResultText"));
 
+        //try setting font that has japanese characters
+        //Font font = Font.font("Noto", 10);   /Noto Serif CJK
+
+        Font font = Font.font("Noto Sans CJK JP", 10);
+        if(font != null){
+            root.setStyle("-fx-font-family: Noto Sans CJK JP;");
+
+            titleLabel.setFont(font);
+            btnEN.setFont(font);
+            btnFR.setFont(font);
+            btnJP.setFont(font);
+            btnIR.setFont(font);
+
+            lblDistance.setFont(font);
+            lblConsumption.setFont(font);
+            lblPrice.setFont(font);
+            lblResult.setFont(font);
+            btnCalculate.setFont(font);
+
+            //promptssetFont(font);
+            txtDistance.setFont(font);
+            txtConsumption.setFont(font);
+            txtPrice.setFont(font);
+            lblResultText.setFont(font);
+
+        }
+
     }
 
 
     protected void setLeftToRight(){
-
         //persian is always rtl
         btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         btnEN.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
@@ -170,7 +197,6 @@ public class Controller {
     }
 
     protected void setRightToLeft(){
-
         //persian is always rtl
         btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         btnEN.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);

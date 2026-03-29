@@ -63,31 +63,31 @@
       <Separator prefHeight="20.0" prefWidth="500.0" />
       <Pane fx:id="inputPane" prefHeight="37.0" prefWidth="500.0">
          <children>
-            <Label fx:id="lblDistance" layoutX="137.0" layoutY="-1.0" prefHeight="39.0" prefWidth="112.0" text="lblDistance" />
+            <Label fx:id="lblDistance" layoutX="104.0" layoutY="-1.0" prefHeight="39.0" prefWidth="145.0" text="lblDistance" />
             <TextField fx:id="txtDistance" layoutX="250.0" layoutY="-1.0" prefHeight="39.0" prefWidth="180.0" />
          </children>
       </Pane>
       <Pane fx:id="inputPane1" prefHeight="37.0" prefWidth="500.0">
          <children>
-            <Label fx:id="lblConsumption" layoutX="137.0" layoutY="-1.0" prefHeight="39.0" prefWidth="112.0" text="lblConsumption" />
+            <Label fx:id="lblConsumption" layoutX="104.0" layoutY="-1.0" prefHeight="39.0" prefWidth="145.0" text="lblConsumption" />
             <TextField fx:id="txtConsumption" layoutX="250.0" layoutY="-1.0" prefHeight="39.0" prefWidth="180.0" />
          </children>
       </Pane>
       <Pane fx:id="inputPane2" prefHeight="37.0" prefWidth="500.0">
          <children>
-            <Label fx:id="lblPrice" layoutX="137.0" layoutY="-1.0" prefHeight="39.0" prefWidth="112.0" text="lblPrice" />
+            <Label fx:id="lblPrice" layoutX="104.0" layoutY="-1.0" prefHeight="39.0" prefWidth="145.0" text="lblPrice" />
             <TextField fx:id="txtPrice" layoutX="250.0" layoutY="-1.0" prefHeight="39.0" prefWidth="180.0" />
          </children>
       </Pane>
       <AnchorPane prefHeight="33.0" prefWidth="500.0">
          <children>
-            <Button fx:id="btnCalculate" layoutX="250.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="btnCalculate" />
+            <Button fx:id="btnCalculate" layoutX="250.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="btnCalculate" />
          </children>
       </AnchorPane>
       <Separator prefHeight="20.0" prefWidth="500.0" />
       <Pane fx:id="inputPane21" prefHeight="37.0" prefWidth="500.0">
          <children>
-            <Label fx:id="lblResult" layoutX="137.0" layoutY="-1.0" prefHeight="39.0" prefWidth="112.0" text="lblResult" />
+            <Label fx:id="lblResult" layoutX="104.0" layoutY="-1.0" prefHeight="39.0" prefWidth="145.0" text="lblResult" />
             <TextField fx:id="lblResultText" layoutX="250.0" layoutY="-1.0" prefHeight="39.0" prefWidth="180.0" />
          </children>
       </Pane>
