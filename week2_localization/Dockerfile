@@ -26,10 +26,6 @@ locales \
 #rebuild font cache
 RUN fc-cache -fv
 
-#try setting language as japanese
-#ENV LANG=ja_JP.UTF-8
-#ENV LC_ALL=ja_JP.UTF-8
-
 
 
 #Install dependencies for GUI + Maven build
@@ -42,6 +38,8 @@ RUN wget https://download2.gluonhq.com/openjfx/21/openjfx-21_linux-x64_bin-sdk.z
     unzip /tmp/openjfx.zip -d /opt && \
     rm /tmp/openjfx.zip
 
+#copy JavaFX SDK 21 from local source
+#COPY ./JavaFX_SDK_21/javafx-sdk-21.0.10 ./opt/javafx-sdk-21.0.10
 
 
 RUN mvn dependency:resolve
