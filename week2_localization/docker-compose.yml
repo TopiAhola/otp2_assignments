@@ -1,0 +1,19 @@
+services:
+  application:
+    image: week2_localization:latest
+    container_name: week2_localization
+
+
+    environment:
+      #for Xming display output
+      DISPLAY: host.docker.internal:0
+
+    volumes:
+     - /tmp/.X11-unix:/tmp/.X11-unix  #remove this?
+
+volumes:
+  server_data:
+
+
+
+
