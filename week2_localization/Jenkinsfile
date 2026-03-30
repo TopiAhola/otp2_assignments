@@ -47,11 +47,20 @@ pipeline {
             }
         }
 
-        stage('Publish Coverage Report with Jacoco plugin') {
+        stage('Publish Coverage Report with Coverage plugin') {
+            steps {
+                recordCoverage(
+                    tools: [[parser: 'JACOCO', pattern: '**//* target/site/jacoco/jacoco.xml']]
+                )
+            }
+        }
+
+
+/*         stage('Publish Coverage Report with Jacoco plugin') {
             steps {
                 jacoco()
             }
-        }
+        } */
 
  /*        stage('Package .jar') {
             steps {
