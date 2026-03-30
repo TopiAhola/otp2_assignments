@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'PaikallinenMaven'
+        maven 'Default'
         git 'Default'
     }
 
@@ -12,6 +12,8 @@ pipeline {
         DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
         DOCKER_IMAGE_TAG = "week2_localization"
         PATH_TO_DOCKER_EXE = "path_to_docker_exe"
+
+        REPO_WORKING_DIRECTORY = "./week2_localization"
     }
 
     stages {
@@ -23,19 +25,19 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                bat '''
-                cd ./week1_localization
+                bat """
+                cd ${REPO_WORKING_DIRECTORY}
                 mvn clean test
-                '''
+                """
             }
         }
 
         stage('Code Coverage') {
             steps {
-                bat '''
-                cd ./week1_localization
+                bat """
+                cd ${REPO_WORKING_DIRECTORY}
                  mvn jacoco:report
-                 '''
+                 """
             }
         }
 
@@ -51,20 +53,20 @@ pipeline {
             }
         }
 
-        stage('Package .jar') {
+ /*        stage('Package .jar') {
             steps {
-                bat '''
-                cd ./week1_localization
+                bat """
+                cd ${REPO_WORKING_DIRECTORY}
                  mvn package
-                 '''
+                 """
             }
-        }
+        } */
 
-        stage('Build Docker Image with .jar') {
+        stage('Build Docker Image with Dockerfile') {
             steps {
                 //build from dockerfile
                 script {
-                    dir ('./week1_localization/') {
+                    dir ("${REPO_WORKING_DIRECTORY}") {
                         docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                     }
                 }
