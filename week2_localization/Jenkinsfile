@@ -41,19 +41,19 @@ pipeline {
             }
         }
 
-        stage('Publish Test Results') {
+/*         stage('Publish Test Results') {
             steps {
-                junit '*/target/surefire-reports/*.xml'
+                junit '*//* target/surefire-reports *//*.xml'
             }
         }
 
         stage('Publish Coverage Report with Coverage plugin') {
             steps {
                 recordCoverage(
-                    tools: [[parser: 'JACOCO', pattern: '**//* target/site/jacoco/jacoco.xml']]
+                    tools: [[parser: 'JACOCO', pattern: '**//*  *//* target/site/jacoco/jacoco.xml']]
                 )
             }
-        }
+        } */
 
 
 /*         stage('Publish Coverage Report with Jacoco plugin') {
