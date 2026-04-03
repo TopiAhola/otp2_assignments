@@ -1,8 +1,28 @@
 services:
-  application:
-    image: week2_localization:latest
-    container_name: week2_localization
 
+  db:
+    image: mariadb:latest
+    container_name: database
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: "rootpassword"
+      MARIADB_DATABASE: "otp2_week3"
+      #MYSQL_ROOT_PASSWORD: test1
+      #MYSQL_DATABASE: calc_data2
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
+
+    ports:
+      - "3306:3306"
+    volumes:
+      #- db_data:/var/lib/mysql #remove this?
+      - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro   #config file
+
+
+  application:
+    image: otp2_week3:latest
+    container_name: application
 
     environment:
       #for Xming display output
@@ -11,6 +31,10 @@ services:
 
     volumes:
      - /tmp/.X11-unix:/tmp/.X11-unix  #remove this?
+
+
+
+
 
 volumes:
   server_data:
