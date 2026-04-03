@@ -27,7 +27,6 @@ locales \
 RUN fc-cache -fv
 
 
-
 #Install dependencies for GUI + Maven build
 RUN apt-get update && \
     apt-get install -y maven wget unzip libgtk-3-0 libgbm1 libx11-6 && \
