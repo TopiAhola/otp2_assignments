@@ -85,23 +85,28 @@ The application container wains for database containers health check.
 
 ### Submission Requirements 
 1. GitHub Repository Including: 
-• Source code (Java files, FXML, CSS) 
-• Database schema file (schema.sql) 
-• Dockerfile 
-• Jenkinsfile 
-• docker-compose.yml (optional) 
-• README with setup instructions 
+• Source code (Java files, FXML, CSS) <br>
+• Database schema file (schema.sql) <br> 
+• Dockerfile <br>
+• Jenkinsfile <br>
+• docker-compose.yml (optional) <br> 
+• README with setup instructions <br>
 
 
 2. Screenshots Showing: 
-• calculation_records table shows at least 3 calculation records with distance, consumption, price, 
-total_fuel, total_cost, language, timestamp 
-• localization_strings table showing key-value pairs for all four languages (EN, FR, JP, IR) 
-• Application screenshots with all four languages (EN, FR, JP, IR) showing calculations 
-• Include your name tag in all screenshots 
+• calculation_records table shows at least 3 calculation records with distance, consumption, price,  
+total_fuel, total_cost, language, timestamp <br>
+• localization_strings table showing key-value pairs for all four languages (EN, FR, JP, IR) <br> 
+• Application screenshots with all four languages (EN, FR, JP, IR) showing calculations <br> 
+• Include your name tag in all screenshots <br> 
 
 
 3. Database Configuration: 
-• Provide clear instructions for setting up the database in README 
-• Document database connection configuration requirements 
-• Include sample data insertion script (optional but recommended)
+• Provide clear instructions for setting up the database in README <br> 
+• Document database connection configuration requirements <br> 
+• Include sample data insertion script (optional but recommended) <br>
+
+<figure>
+<figcaption>Picture of Jenkins pipeline</figcaption>
+<img src="pictures/jenkins.png" alt="Picture of Jenkins pipeline">
+</figure>
