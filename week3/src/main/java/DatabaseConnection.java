@@ -1,6 +1,8 @@
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Create a DatabaseConnection class including:
@@ -23,6 +25,10 @@ public class DatabaseConnection {
 
         public static Connection getConnection(){
             try {
+
+                //Class.forName("org.mariadb.jdbc.Driver");
+
+
                 //jdbc:mariadb://localhost:3306/otp2_week3
                 String DB_DRIVER = System.getenv("DB_DRIVER");
                 String DB_HOST = System.getenv("DB_HOST");
@@ -33,14 +39,22 @@ public class DatabaseConnection {
 
                 if (DB_DRIVER == null || DB_HOST == null || DB_PORT == null || DB_NAME == null || USER == null || PASSWORD == null){
 
-                    return DriverManager.getConnection("jdbc:mariadb://localhost:3306/otp2_week3", "databaseuser", "password");
+                    /*Driver dr = DriverManager.getDriver("jdbc:mariadb://localhost:3306/otp2_week3");
+                    Properties pr = new Properties();
+                    pr.setProperty("user", "databaseuser");
+                    pr.setProperty("password", "password");
+                    Connection conn = dr.connect("jdbc:mariadb://localhost:3306/otp2_week3", pr);*/
+
+                    Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/otp2_week3?user=databaseuser&password=password");
+                    return conn;
                 }
 
+                System.out.println(DB_DRIVER+"://"+DB_HOST+":"+DB_PORT+"/"+DB_NAME);
                 return DriverManager.getConnection(DB_DRIVER+"://"+DB_HOST+":"+DB_PORT+"/"+DB_NAME , USER, PASSWORD);
 
 
 
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
