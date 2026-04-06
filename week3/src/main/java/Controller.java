@@ -110,6 +110,7 @@ public class Controller {
 
               //save results to database
               CalculationService.saveCalculation(distance,consumption,price,total_consumption,total_price, localizationService.getCurrentLanguage().toString());
+              System.out.println(localizationService.getCurrentLanguage().toString());
 
           } catch (Exception ex) {
               ex.printStackTrace();

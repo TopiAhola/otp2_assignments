@@ -1,6 +1,6 @@
 services:
 
-  dataB:
+  datab:
     image: mariadb:latest
     container_name: database
     restart: always
@@ -9,38 +9,36 @@ services:
       MARIADB_DATABASE: "otp2_week3"
       #MYSQL_ROOT_PASSWORD: test1
       #MYSQL_DATABASE: calc_data2
-      MARIADB_USER: user
+      MARIADB_USER: databaseuser
       MARIADB_PASSWORD: password
 
     ports:
       - "3306:3306"
     volumes:
       #- db_data:/var/lib/mysql #remove this?
-      - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql #sql file for db initialization
       - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro   #config file
 
 
   application:
     image: otp2_week3:latest
     container_name: application
+    depends_on:
+      - datab
 
     environment:
       #for Xming display output
       DISPLAY: host.docker.internal:0
 
       DB_DRIVER: "jdbc:mariadb"
-      DB_HOST: dataB
+      DB_HOST: datab
       DB_PORT: "3306"
       DB_NAME: "otp2_week3"
       USER: "databaseuser"
       PASSWORD: "password"
 
-
     volumes:
      - /tmp/.X11-unix:/tmp/.X11-unix  #remove this?
-
-
-
 
 
 volumes:

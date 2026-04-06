@@ -50,15 +50,19 @@ public class LocalizationService {
         switch (language) {
             case en:
                 currentLocalization = localization_en;
+                currentLanguage = Language.en;
                 break;
             case fr:
                 currentLocalization = localization_fr;
+                currentLanguage = Language.fr;
                 break;
             case ja:
                 currentLocalization = localization_ja;
+                currentLanguage = Language.ja;
                 break;
             case fa:
                 currentLocalization = localization_fa;
+                currentLanguage = Language.fa;
                 break;
             default:
                 currentLocalization = localization_en;
