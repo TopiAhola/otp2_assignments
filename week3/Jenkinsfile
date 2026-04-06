@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'PaikallinenMaven'
+        maven 'Default'
         git 'Default'
     }
 
