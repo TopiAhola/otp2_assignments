@@ -1,6 +1,6 @@
 services:
 
-  db:
+  dataB:
     image: mariadb:latest
     container_name: database
     restart: always
@@ -27,6 +27,13 @@ services:
     environment:
       #for Xming display output
       DISPLAY: host.docker.internal:0
+
+      DB_DRIVER: "jdbc:mariadb"
+      DB_HOST: dataB
+      DB_PORT: "3306"
+      DB_NAME: "otp2_week3"
+      USER: "databaseuser"
+      PASSWORD: "password"
 
 
     volumes:

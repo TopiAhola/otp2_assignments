@@ -44,58 +44,47 @@ public class Controller {
     private Button btnIR;
 
 
-    //resourceBundles
-    ResourceBundle currentBundle;
-    ResourceBundle[] bundles;
+    //make a localizationService
+    LocalizationService localizationService;
 
-    //reference to Calculator
+    //make a Calculator
     Calculator calculator;
 
     @FXML
     public void initialize(){
 
-        //Locales
-        Locale eng = new Locale("en", "US");
-        Locale fra = new Locale("fr","FR");
-        Locale jpn = new Locale("ja","JP");
-        Locale per = new Locale("fa","IR");
-
-        //ResourceBundles
-        ResourceBundle english = ResourceBundle.getBundle("moreLanguages", eng);
-        ResourceBundle french = ResourceBundle.getBundle("moreLanguages", fra);
-        ResourceBundle japanese = ResourceBundle.getBundle("moreLanguages", jpn);
-        ResourceBundle persian = ResourceBundle.getBundle("moreLanguages", per);
-
-        //set default bundle
-        bundles = new ResourceBundle[] {english,french,japanese, persian};
-        currentBundle = english;
-        root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-
         //make the calculator
         calculator = new Calculator();
+
+        //make localizationService
+        localizationService = new LocalizationService();
+
+        //set default language
+        localizationService.setCurrentLocalization(LocalizationService.Language.en);
+        root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
         //load text
         loadLanguageStrings();
 
         //set functions for language buttons
         btnEN.setOnAction(e -> {
-            currentBundle = english;
+            localizationService.setCurrentLocalization(LocalizationService.Language.en);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnFR.setOnAction(e -> {
-            currentBundle = french;
+            localizationService.setCurrentLocalization(LocalizationService.Language.fr);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnJP.setOnAction(e -> {
-            currentBundle = japanese;
+            localizationService.setCurrentLocalization(LocalizationService.Language.ja);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnIR.setOnAction(e -> {
-            currentBundle = persian;
+            localizationService.setCurrentLocalization(LocalizationService.Language.fa);
             setRightToLeft();
             loadLanguageStrings();
         });
@@ -109,16 +98,22 @@ public class Controller {
 
               System.out.println(distance + " " + consumption + " " + price);
 
+              double total_consumption = calculator.calculateConsumption(distance,consumption);
+              double total_price = calculator.calculateCost(distance,consumption, price);
+
               lblResultText.setText(
                       String.format("%.02fl %.02f" ,
-                      calculator.calculateConsumption(distance,consumption),
-                      calculator.calculateCost(distance,consumption, price)
+                      total_consumption,
+                      total_price
                       )
               );
 
+              //save results to database
+              CalculationService.saveCalculation(distance,consumption,price,total_consumption,total_price, localizationService.getCurrentLanguage().toString());
+
           } catch (Exception ex) {
               ex.printStackTrace();
-              lblResultText.setText(currentBundle.getString("errorMessage"));
+              lblResultText.setText(localizationService.getString("errorMessage"));
           }
         });
 
@@ -126,23 +121,23 @@ public class Controller {
 
 
     protected void loadLanguageStrings(){
-        titleLabel.setText(currentBundle.getString("titleLabel"));
-        btnEN.setText(currentBundle.getString("btnEN"));
-        btnFR.setText(currentBundle.getString("btnFR"));
-        btnJP.setText(currentBundle.getString("btnJP"));
-        btnIR.setText(currentBundle.getString("btnIR"));
+        titleLabel.setText(localizationService.getString("titleLabel"));
+        btnEN.setText(localizationService.getString("btnEN"));
+        btnFR.setText(localizationService.getString("btnFR"));
+        btnJP.setText(localizationService.getString("btnJP"));
+        btnIR.setText(localizationService.getString("btnIR"));
 
-        lblDistance.setText(currentBundle.getString("lblDistance"));
-        lblConsumption.setText(currentBundle.getString("lblConsumption"));
-        lblPrice.setText(currentBundle.getString("lblPrice"));
-        lblResult.setText(currentBundle.getString("lblResult"));
-        btnCalculate.setText(currentBundle.getString("btnCalculate"));
+        lblDistance.setText(localizationService.getString("lblDistance"));
+        lblConsumption.setText(localizationService.getString("lblConsumption"));
+        lblPrice.setText(localizationService.getString("lblPrice"));
+        lblResult.setText(localizationService.getString("lblResult"));
+        btnCalculate.setText(localizationService.getString("btnCalculate"));
 
         //prompts
-        txtDistance.setPromptText(currentBundle.getString("txtDistance"));
-        txtConsumption.setPromptText(currentBundle.getString("txtConsumption"));
-        txtPrice.setPromptText(currentBundle.getString("txtPrice"));
-        lblResultText.setPromptText(currentBundle.getString("lblResultText"));
+        txtDistance.setPromptText(localizationService.getString("txtDistance"));
+        txtConsumption.setPromptText(localizationService.getString("txtConsumption"));
+        txtPrice.setPromptText(localizationService.getString("txtPrice"));
+        lblResultText.setPromptText(localizationService.getString("lblResultText"));
 
         //try setting font that has japanese characters
         //Font font = Font.font("Noto", 10);   /Noto Serif CJK
