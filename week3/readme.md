@@ -30,7 +30,7 @@ Note: when setting up in Docker containers the DB_HOST variable has to be set dy
 
 USER and PASSWORD variables have to match MARIADB_USER and MARIADB_PASSWORD set by the compose file 
 
-The application container wains for database containers health check.
+The application container waits for database containers health check.
 
       datab:        
         image: mariadb:latest
