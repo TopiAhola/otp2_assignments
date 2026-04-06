@@ -98,19 +98,24 @@ public class Controller {
 
               System.out.println(distance + " " + consumption + " " + price);
 
-              double total_consumption = calculator.calculateConsumption(distance,consumption);
-              double total_price = calculator.calculateCost(distance,consumption, price);
+              if (distance > 0 && consumption > 0 && price > 0) {
+                  double total_consumption = calculator.calculateConsumption(distance, consumption);
+                  double total_price = calculator.calculateCost(distance, consumption, price);
 
-              lblResultText.setText(
-                      String.format("%.02fl %.02f" ,
-                      total_consumption,
-                      total_price
-                      )
-              );
+                  lblResultText.setText(
+                          String.format("%.02fl %.02f",
+                                  total_consumption,
+                                  total_price
+                          )
+                  );
 
-              //save results to database
-              CalculationService.saveCalculation(distance,consumption,price,total_consumption,total_price, localizationService.getCurrentLanguage().toString());
-              System.out.println(localizationService.getCurrentLanguage().toString());
+                  //save results to database
+                  CalculationService.saveCalculation(distance, consumption, price, total_consumption, total_price, localizationService.getCurrentLanguage().toString());
+                  System.out.println(localizationService.getCurrentLanguage().toString());
+
+              } else {
+                  lblResultText.setText(localizationService.getString("errorMessage"));
+              }
 
           } catch (Exception ex) {
               ex.printStackTrace();

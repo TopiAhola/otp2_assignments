@@ -39,27 +39,6 @@ pipeline {
             }
         }
 
-        stage('Publish Test Results') {
-            steps {
-                junit '*/target/surefire-reports/*.xml'
-            }
-        }
-
-        stage('Publish Coverage Report with Jacoco plugin') {
-            steps {
-                jacoco()
-            }
-        }
-
-        stage('Package .jar') {
-            steps {
-                bat '''
-                cd ./week1_localization
-                 mvn package
-                 '''
-            }
-        }
-
         stage('Build Docker Image with .jar') {
             steps {
                 //build from dockerfile
