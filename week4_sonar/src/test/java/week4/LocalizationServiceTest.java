@@ -21,6 +21,9 @@ class LocalizationServiceTest {
 
     @Test
     void setCurrentLocalization() {
+        localizationService.setCurrentLocalization(LocalizationService.Language.EN);
+        localizationService.setCurrentLocalization(LocalizationService.Language.FR);
+        localizationService.setCurrentLocalization(LocalizationService.Language.FA);
         localizationService.setCurrentLocalization(LocalizationService.Language.JA);
         assertEquals(LocalizationService.Language.JA, localizationService.getCurrentLanguage());
     }

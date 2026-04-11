@@ -3,7 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/week3/init.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/week3/src/main/java/CalculationService.java" dialect="MariaDB" />
-    <file url="file://$PROJECT_DIR$/week4_sonar/init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/week4_sonar/init.sql" dialect="MariaDB" />
     <file url="PROJECT" dialect="MariaDB" />
   </component>
 </project>

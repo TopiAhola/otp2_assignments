@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <javafx.version>21.0.1</javafx.version>
-        <project.mainClass>week4.Main</project.mainClass>
+        <project.mainClass>Main</project.mainClass>
     </properties>
 
     <dependencies>

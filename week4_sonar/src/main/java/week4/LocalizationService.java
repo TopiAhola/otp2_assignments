@@ -75,7 +75,7 @@ public class LocalizationService {
     public void loadLocalizations(){
         try (
                 Connection connection = DatabaseConnection.getConnection();
-                Statement statement = connection.createStatement();
+                Statement statement = connection.createStatement(); //`id`,`key`,`value`,`language`
                 ResultSet result = statement.executeQuery("SELECT `id`,`key`,`value`,`language` FROM localization");
             ) {
 

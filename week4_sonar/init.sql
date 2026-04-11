@@ -12,7 +12,7 @@ USE otp2_week3;
         total_cost DOUBLE NOT NULL,
         language VARCHAR(10),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE IF NOT EXISTS localization (
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS localization (
     value VARCHAR(255) NOT NULL,
     language VARCHAR(10) NOT NULL,
     UNIQUE KEY unique_key_lang (`key`, `language`)
-);
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
 
 INSERT INTO localization (`key`, value, language) VALUES

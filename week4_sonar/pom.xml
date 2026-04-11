@@ -13,17 +13,18 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javafx.version>21.0.1</javafx.version>
-        <project.mainClass>week4.Main</project.mainClass>
+        <project.mainClass>Week4.Main</project.mainClass>
 
         <!-- Variables for sonar related things -->
         <sonar.projectKey>week4SonarProjectKey</sonar.projectKey>
         <sonar.projectName>week4SonarProjectKey</sonar.projectName>
         <sonar.projectVersion>69</sonar.projectVersion>
         <sonar.organization>Topi.ahola</sonar.organization>
-        <sonar.sources>src</sonar.sources>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
-
+        <sonar.coverage.exclusions>**/test/**, **/Main</sonar.coverage.exclusions>
 
         <maven.sonarPluginVersion>5.5.0.6356</maven.sonarPluginVersion>
     </properties>
@@ -95,7 +96,7 @@
         <plugins>
 
             <!-- try sonarScanner maven plugin -->
-            <!-- enables running sonarScanner as maven target, requires token as argument or ENV -->
+            <!-- enables running sonarScanner as maven target, requires token as argument or ENV  org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356 -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>

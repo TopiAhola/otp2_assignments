@@ -1,1 +1,18 @@
-mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=%SONAR_TOKEN%
+mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=SONAR_TOKEN
+
+#powershell / intellijTerminal:
+mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=$Env:SONAR_TOKEN
+
+
+##versionumero org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356
+
+$env:MY_VAR = "my_value"
+#set envs manually
+
+$env:DB_DRIVER = "jdbc:mariadb"
+$env:DB_HOST = "localhost"
+$env:DB_PORT = "3306"
+$env:DB_NAME = "otp2_week3"
+$env:USER = "databaseuser"
+$env:PASSWORD = "password"
+mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -D sonar.token=$Env:SONAR_TOKEN

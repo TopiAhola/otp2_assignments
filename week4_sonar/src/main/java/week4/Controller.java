@@ -90,35 +90,47 @@ public class Controller {
 
         //function for calculate button
         btnCalculate.setOnAction(e -> {
-          try {
-              double distance = Double.parseDouble(txtDistance.getText().trim());
-              double consumption =  Double.parseDouble(txtConsumption.getText().trim());
-              double price = Double.parseDouble(txtPrice.getText().trim());
+                    try {
+                        double distance = Double.parseDouble(txtDistance.getText().trim());
+                        double consumption = Double.parseDouble(txtConsumption.getText().trim());
+                        double price = Double.parseDouble(txtPrice.getText().trim());
 
-             if (distance > 0 && consumption > 0 && price > 0) {
-                  double totalConsumption = calculator.calculateConsumption(distance, consumption);
-                  double totalPrice = calculator.calculateCost(distance, consumption, price);
+                        if (distance > 0 && consumption > 0 && price > 0) {
+                            double totalConsumption = calculator.calculateConsumption(distance, consumption);
+                            double totalPrice = calculator.calculateCost(distance, consumption, price);
 
-                  lblResultText.setText(
-                          String.format("%.02fl %.02f",
-                                  totalConsumption,
-                                  totalPrice
-                          )
-                  );
+                            lblResultText.setText(
+                                    String.format("%.02fl %.02f",
+                                            totalConsumption,
+                                            totalPrice
+                                    )
+                            );
 
-                  //save results to database
-                  CalculationService.saveCalculation(distance, consumption, price, totalConsumption, totalPrice, localizationService.getCurrentLanguage().toString());
+                            //save results to database
+                            CalculationService.saveCalculation(distance, consumption, price, totalConsumption, totalPrice, localizationService.getCurrentLanguage().toString());
 
-              } else {
-                  lblResultText.setText(localizationService.getString("errorMessage"));
-              }
+                        } else {
+                            lblResultText.setText(localizationService.getString("errorMessage"));
+                        }
 
-          } catch (Exception ex) {
-              Logger.log(ex);
-              lblResultText.setText(localizationService.getString("errorMessage"));
-          }
-        });
+                    } catch (Exception ex) {
+                        Logger.log(ex);
+                        lblResultText.setText(localizationService.getString("errorMessage"));
+                    }
+                }
+        );
 
+
+
+    }
+
+
+    public void clickAllButtons(){
+        btnCalculate.fire();
+        btnEN.fire();
+        btnFR.fire();
+        btnIR.fire();
+        btnJP.fire();
     }
 
 

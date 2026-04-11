@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalculationServiceTest {
 
     @Test
-    void saveCalculation() {
+    void saveCalculationTest() {
         assertDoesNotThrow( ()-> CalculationService.saveCalculation(1,2,3,4,5,"en") );
     }
 }

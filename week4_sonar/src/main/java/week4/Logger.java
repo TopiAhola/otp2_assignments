@@ -11,12 +11,7 @@ public class Logger {
     static ArrayList<String> logs = new ArrayList<>();
 
     public static void log(Exception e){
-        try {
-            logs.add(e.getMessage());
-
-        } catch (Exception ex) {
-            logs.add(ex.getMessage());
-        }
+        logs.add(e.getMessage());
     }
 
     public static void log(String message){
