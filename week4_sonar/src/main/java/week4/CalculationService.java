@@ -16,8 +16,10 @@ import java.sql.PreparedStatement;
     */
 public class CalculationService {
 
+    private CalculationService() {
+    }
 
-     public static void saveCalculation(double distance, double consumption, double price, double total_fuel, double total_cost, String language){
+    public static void saveCalculation(double distance, double consumption, double price, double totalFuel, double totalCost, String language){
         try (
                 Connection connection = week4.DatabaseConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement("INSERT INTO calculation_records(distance, consumption, price, total_fuel, total_cost, language) VALUES (?, ?, ?, ?, ?, ?)");
@@ -26,14 +28,14 @@ public class CalculationService {
             statement.setDouble(1,distance);
             statement.setDouble(2,consumption);
             statement.setDouble(3,price);
-            statement.setDouble(4,total_fuel);
-            statement.setDouble(5,total_cost);
+            statement.setDouble(4,totalFuel);
+            statement.setDouble(5,totalCost);
             statement.setString(6,language);
             statement.executeUpdate();
             connection.commit();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.log(ex);
         }
     }
 

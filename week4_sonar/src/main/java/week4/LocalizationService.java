@@ -19,13 +19,13 @@ import java.util.Map;
  */
 public class LocalizationService {
 
-    public Map<String,String> localization_en;
-    public Map<String,String> localization_fr;
-    public Map<String,String> localization_ja;
-    public Map<String,String> localization_fa;
+    private Map<String,String> localization_en;
+    private Map<String,String> localization_fr;
+    private Map<String,String> localization_ja;
+    private Map<String,String> localization_fa;
 
-    public Map<String,String> currentLocalization;
-    public Language currentLanguage;
+    private Map<String,String> currentLocalization;
+    private Language currentLanguage;
 
     public LocalizationService(){
         localization_en = new HashMap<String,String>();
@@ -34,14 +34,14 @@ public class LocalizationService {
         localization_fa = new HashMap<String,String>();
 
         currentLocalization = localization_en;
-        currentLanguage = Language.en;
+        currentLanguage = Language.EN;
 
         //load from database
         loadLocalizations();
     }
 
     public enum Language{
-        en,fr,ja,fa
+        EN, FR, JA, FA
     }
 
     public Language getCurrentLanguage(){
@@ -50,21 +50,21 @@ public class LocalizationService {
 
     public void setCurrentLocalization(Language language) {
         switch (language) {
-            case en:
+            case EN:
                 currentLocalization = localization_en;
-                currentLanguage = Language.en;
+                currentLanguage = Language.EN;
                 break;
-            case fr:
+            case FR:
                 currentLocalization = localization_fr;
-                currentLanguage = Language.fr;
+                currentLanguage = Language.FR;
                 break;
-            case ja:
+            case JA:
                 currentLocalization = localization_ja;
-                currentLanguage = Language.ja;
+                currentLanguage = Language.JA;
                 break;
-            case fa:
+            case FA:
                 currentLocalization = localization_fa;
-                currentLanguage = Language.fa;
+                currentLanguage = Language.FA;
                 break;
             default:
                 currentLocalization = localization_en;
@@ -76,7 +76,7 @@ public class LocalizationService {
         try (
                 Connection connection = DatabaseConnection.getConnection();
                 Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM localization");
+                ResultSet result = statement.executeQuery("SELECT `id`,`key`,`value`,`language` FROM localization");
             ) {
 
             //insert results to maps
@@ -86,8 +86,8 @@ public class LocalizationService {
                 String language = result.getString("language");
 
                 if (language == null || key == null || value == null){
-                    System.out.println("Null values in database!");
-                    System.out.println("Key: " + key + " Value: " + value + " Language: " + language);
+                    Logger.log(new Exception("Null values in database!"));
+                    Logger.log("Key: " + key + " Value: " + value + " Language: " + language);
                 } else {
 
                     if (language.equals("en")) {
@@ -99,7 +99,7 @@ public class LocalizationService {
                     } else if (language.equals("fa")) {
                         localization_fa.put(key, value);
                     } else {
-                        System.out.println("Language");
+                        Logger.log("Language");
                     }
                 }
             }
@@ -107,7 +107,7 @@ public class LocalizationService {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.log(e);
         }
     }
 

@@ -15,8 +15,9 @@
         <javafx.version>21.0.1</javafx.version>
         <project.mainClass>week4.Main</project.mainClass>
 
-        <!--  -->
+        <!-- Variables for sonar related things -->
         <sonar.projectKey>week4SonarProjectKey</sonar.projectKey>
+        <maven.sonarPluginVersion>5.5.0.6356</maven.sonarPluginVersion>
     </properties>
 
 
@@ -84,6 +85,15 @@
         </resources>
 
         <plugins>
+
+            <!-- try sonarScanner maven plugin -->
+            <!-- enables running sonarScanner as maven target, requires token as argument or ENV -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${maven.sonarPluginVersion}</version>
+            </plugin>
+
             <!-- maven compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

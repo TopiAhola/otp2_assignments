@@ -59,7 +59,7 @@ public class Controller {
         localizationService = new LocalizationService();
 
         //set default language
-        localizationService.setCurrentLocalization(LocalizationService.Language.en);
+        localizationService.setCurrentLocalization(LocalizationService.Language.EN);
         root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         btnIR.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
@@ -68,22 +68,22 @@ public class Controller {
 
         //set functions for language buttons
         btnEN.setOnAction(e -> {
-            localizationService.setCurrentLocalization(LocalizationService.Language.en);
+            localizationService.setCurrentLocalization(LocalizationService.Language.EN);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnFR.setOnAction(e -> {
-            localizationService.setCurrentLocalization(LocalizationService.Language.fr);
+            localizationService.setCurrentLocalization(LocalizationService.Language.FR);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnJP.setOnAction(e -> {
-            localizationService.setCurrentLocalization(LocalizationService.Language.ja);
+            localizationService.setCurrentLocalization(LocalizationService.Language.JA);
             setLeftToRight();
             loadLanguageStrings();
         });
         btnIR.setOnAction(e -> {
-            localizationService.setCurrentLocalization(LocalizationService.Language.fa);
+            localizationService.setCurrentLocalization(LocalizationService.Language.FA);
             setRightToLeft();
             loadLanguageStrings();
         });
@@ -95,29 +95,26 @@ public class Controller {
               double consumption =  Double.parseDouble(txtConsumption.getText().trim());
               double price = Double.parseDouble(txtPrice.getText().trim());
 
-              System.out.println(distance + " " + consumption + " " + price);
-
-              if (distance > 0 && consumption > 0 && price > 0) {
-                  double total_consumption = calculator.calculateConsumption(distance, consumption);
-                  double total_price = calculator.calculateCost(distance, consumption, price);
+             if (distance > 0 && consumption > 0 && price > 0) {
+                  double totalConsumption = calculator.calculateConsumption(distance, consumption);
+                  double totalPrice = calculator.calculateCost(distance, consumption, price);
 
                   lblResultText.setText(
                           String.format("%.02fl %.02f",
-                                  total_consumption,
-                                  total_price
+                                  totalConsumption,
+                                  totalPrice
                           )
                   );
 
                   //save results to database
-                  CalculationService.saveCalculation(distance, consumption, price, total_consumption, total_price, localizationService.getCurrentLanguage().toString());
-                  System.out.println(localizationService.getCurrentLanguage().toString());
+                  CalculationService.saveCalculation(distance, consumption, price, totalConsumption, totalPrice, localizationService.getCurrentLanguage().toString());
 
               } else {
                   lblResultText.setText(localizationService.getString("errorMessage"));
               }
 
           } catch (Exception ex) {
-              ex.printStackTrace();
+              Logger.log(ex);
               lblResultText.setText(localizationService.getString("errorMessage"));
           }
         });
@@ -163,7 +160,6 @@ public class Controller {
             lblResult.setFont(font);
             btnCalculate.setFont(font);
 
-            //promptssetFont(font);
             txtDistance.setFont(font);
             txtConsumption.setFont(font);
             txtPrice.setFont(font);

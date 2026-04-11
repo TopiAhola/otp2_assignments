@@ -22,39 +22,30 @@ public class DatabaseConnection {
 
         DriverManager driverManager;
 
-        public static Connection getConnection(){
+    private DatabaseConnection() {
+    }
+
+    public static Connection getConnection(){
             try {
-
-                //Class.forName("org.mariadb.jdbc.Driver");
-
-
                 //jdbc:mariadb://localhost:3306/otp2_week3
-                String DB_DRIVER = System.getenv("DB_DRIVER");
-                String DB_HOST = System.getenv("DB_HOST");
-                String DB_PORT = System.getenv("DB_PORT");
-                String DB_NAME = System.getenv("DB_NAME");
-                String USER = System.getenv("USER");
-                String PASSWORD = System.getenv("PASSWORD");
+                String dbDriver = System.getenv("DB_DRIVER");
+                String dbHost = System.getenv("DB_HOST");
+                String dbPort = System.getenv("DB_PORT");
+                String dbName = System.getenv("DB_NAME");
+                String user = System.getenv("USER");
+                String password = System.getenv("PASSWORD");
 
-                if (DB_DRIVER == null || DB_HOST == null || DB_PORT == null || DB_NAME == null || USER == null || PASSWORD == null){
-
-                    /*Driver dr = DriverManager.getDriver("jdbc:mariadb://localhost:3306/otp2_week3");
-                    Properties pr = new Properties();
-                    pr.setProperty("user", "databaseuser");
-                    pr.setProperty("password", "password");
-                    Connection conn = dr.connect("jdbc:mariadb://localhost:3306/otp2_week3", pr);*/
-
-                    Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/otp2_week3?user=databaseuser&password=password");
-                    return conn;
+                if (dbDriver == null || dbHost == null || dbPort == null || dbName == null || user == null || password == null){
+                    Logger.log( new Exception("Environmental variable not found"));
                 }
 
-                System.out.println(DB_DRIVER+"://"+DB_HOST+":"+DB_PORT+"/"+DB_NAME);
-                return DriverManager.getConnection(DB_DRIVER+"://"+DB_HOST+":"+DB_PORT+"/"+DB_NAME , USER, PASSWORD);
+                Logger.log(new Exception(dbDriver+"://"+dbHost+":"+dbPort+"/"+dbName) );
+                return DriverManager.getConnection(dbDriver+"://"+dbHost+":"+dbPort+"/"+dbName , user, password);
 
 
 
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.log(e);
                 return null;
             }
         }

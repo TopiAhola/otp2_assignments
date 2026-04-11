@@ -16,13 +16,13 @@ class LocalizationServiceTest {
 
     @Test
     void getCurrentLanguage() {
-        assertEquals(LocalizationService.Language.en, localizationService.getCurrentLanguage());
+        assertEquals(LocalizationService.Language.EN, localizationService.getCurrentLanguage());
     }
 
     @Test
     void setCurrentLocalization() {
-        localizationService.setCurrentLocalization(LocalizationService.Language.ja);
-        assertEquals(LocalizationService.Language.ja, localizationService.getCurrentLanguage());
+        localizationService.setCurrentLocalization(LocalizationService.Language.JA);
+        assertEquals(LocalizationService.Language.JA, localizationService.getCurrentLanguage());
     }
 
     @Test
@@ -32,8 +32,8 @@ class LocalizationServiceTest {
 
     @Test
     void getString() {
-        localizationService.setCurrentLocalization(LocalizationService.Language.ja);
-        assertEquals(LocalizationService.Language.ja, localizationService.getCurrentLanguage());
+        localizationService.setCurrentLocalization(LocalizationService.Language.JA);
+        assertEquals(LocalizationService.Language.JA, localizationService.getCurrentLanguage());
         assertEquals("default", localizationService.getString(""));
 
     }
