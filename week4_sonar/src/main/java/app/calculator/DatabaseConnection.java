@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

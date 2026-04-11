@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 public class Calculator {
 

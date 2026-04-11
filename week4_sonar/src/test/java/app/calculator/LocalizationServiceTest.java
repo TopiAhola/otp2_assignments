@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

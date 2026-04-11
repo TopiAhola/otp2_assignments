@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,21 +19,21 @@ import java.util.Map;
  */
 public class LocalizationService {
 
-    private Map<String,String> localization_en;
-    private Map<String,String> localization_fr;
-    private Map<String,String> localization_ja;
-    private Map<String,String> localization_fa;
+    private Map<String,String> localizationEn;
+    private Map<String,String> localizationFr;
+    private Map<String,String> localizationJa;
+    private Map<String,String> localizationFa;
 
     private Map<String,String> currentLocalization;
     private Language currentLanguage;
 
     public LocalizationService(){
-        localization_en = new HashMap<String,String>();
-        localization_fr = new HashMap<String,String>();
-        localization_ja = new HashMap<String,String>();
-        localization_fa = new HashMap<String,String>();
+        localizationEn = new HashMap<>();
+        localizationFr = new HashMap<>();
+        localizationJa = new HashMap<>();
+        localizationFa = new HashMap<>();
 
-        currentLocalization = localization_en;
+        currentLocalization = localizationEn;
         currentLanguage = Language.EN;
 
         //load from database
@@ -51,23 +51,23 @@ public class LocalizationService {
     public void setCurrentLocalization(Language language) {
         switch (language) {
             case EN:
-                currentLocalization = localization_en;
+                currentLocalization = localizationEn;
                 currentLanguage = Language.EN;
                 break;
             case FR:
-                currentLocalization = localization_fr;
+                currentLocalization = localizationFr;
                 currentLanguage = Language.FR;
                 break;
             case JA:
-                currentLocalization = localization_ja;
+                currentLocalization = localizationJa;
                 currentLanguage = Language.JA;
                 break;
             case FA:
-                currentLocalization = localization_fa;
+                currentLocalization = localizationFa;
                 currentLanguage = Language.FA;
                 break;
             default:
-                currentLocalization = localization_en;
+                currentLocalization = localizationEn;
                 break;
         }
     }
@@ -91,13 +91,13 @@ public class LocalizationService {
                 } else {
 
                     if (language.equals("en")) {
-                        localization_en.put(key, value);
+                        localizationEn.put(key, value);
                     } else if (language.equals("fr")) {
-                        localization_fr.put(key, value);
+                        localizationFr.put(key, value);
                     } else if (language.equals("ja")) {
-                        localization_ja.put(key, value);
+                        localizationJa.put(key, value);
                     } else if (language.equals("fa")) {
-                        localization_fa.put(key, value);
+                        localizationFa.put(key, value);
                     } else {
                         Logger.log("Language");
                     }

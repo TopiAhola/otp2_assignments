@@ -67,7 +67,7 @@
                <archive>
                    <manifest>
                        <!-- Correct main class, huomaa package!! -->
-                       <mainClass>week4.Main</mainClass>
+                       <mainClass>main.Main</mainClass>
                    </manifest>
                </archive>
            </configuration>

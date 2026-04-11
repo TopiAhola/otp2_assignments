@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

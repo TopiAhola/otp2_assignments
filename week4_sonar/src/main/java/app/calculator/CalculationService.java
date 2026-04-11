@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +21,7 @@ public class CalculationService {
 
     public static void saveCalculation(double distance, double consumption, double price, double totalFuel, double totalCost, String language){
         try (
-                Connection connection = week4.DatabaseConnection.getConnection();
+                Connection connection = DatabaseConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement("INSERT INTO calculation_records(distance, consumption, price, total_fuel, total_cost, language) VALUES (?, ?, ?, ?, ?, ?)");
             ) {
 

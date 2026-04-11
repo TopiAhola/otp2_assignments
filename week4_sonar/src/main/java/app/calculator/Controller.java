@@ -1,4 +1,4 @@
-package week4;
+package app.calculator;
 
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
