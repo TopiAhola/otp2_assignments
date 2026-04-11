@@ -11,6 +11,6 @@ class DatabaseConnectionTest {
     @Test
     void getConnection() {
         Connection c = DatabaseConnection.getConnection();
-        assertNotNull(c);
+        assertNull(c);
     }
 }

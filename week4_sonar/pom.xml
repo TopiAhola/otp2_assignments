@@ -17,6 +17,14 @@
 
         <!-- Variables for sonar related things -->
         <sonar.projectKey>week4SonarProjectKey</sonar.projectKey>
+        <sonar.projectName>week4SonarProjectKey</sonar.projectName>
+        <sonar.projectVersion>69</sonar.projectVersion>
+        <sonar.organization>Topi.ahola</sonar.organization>
+        <sonar.sources>src</sonar.sources>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+
+
         <maven.sonarPluginVersion>5.5.0.6356</maven.sonarPluginVersion>
     </properties>
 
