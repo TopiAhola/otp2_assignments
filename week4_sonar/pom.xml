@@ -5,18 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Topi.ahola</groupId>
-    <!-- artifactId is used for finalName -->
-    <artifactId>otp2_week3</artifactId>
+    <artifactId>week4_sonar</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <javafx.version>21.0.1</javafx.version>
         <project.mainClass>week4.Main</project.mainClass>
+
+        <!--  -->
+        <sonar.projectKey>week4SonarProjectKey</sonar.projectKey>
     </properties>
+
 
     <dependencies>
 
@@ -29,10 +31,10 @@
 
         <!--Junit testing dependency -->
         <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <version>5.13.4</version>
-          <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.13.4</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Jacoco dependency -->
@@ -43,7 +45,7 @@
         </dependency>
 
         <!-- JavaFX modules -->
-       <dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>${javafx.version}</version>
@@ -173,8 +175,9 @@
                 </configuration>
             </plugin>
 
-
         </plugins>
+
+
 
     </build>
 

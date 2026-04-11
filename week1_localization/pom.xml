@@ -23,6 +23,13 @@
           <scope>test</scope>
         </dependency>
 
+        <!-- Jacoco dependency -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.14</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -60,7 +67,7 @@
                <archive>
                    <manifest>
                        <!-- Correct main class, huomaa package!! -->
-                       <mainClass>Main</mainClass>
+                       <mainClass>week4.Main</mainClass>
                    </manifest>
                </archive>
            </configuration>

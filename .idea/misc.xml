@@ -8,7 +8,13 @@
         <option value="$PROJECT_DIR$/week1_localization/pom.xml" />
         <option value="$PROJECT_DIR$/week2_localization/pom.xml" />
         <option value="$PROJECT_DIR$/week3/pom.xml" />
+        <option value="$PROJECT_DIR$/week4_sonar/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/week4/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="ms-21" project-jdk-type="JavaSDK">

@@ -1,0 +1,61 @@
+services:
+
+  datab:
+    image: mariadb:latest
+    container_name: week3_database
+    restart: always
+
+    environment:
+      MARIADB_ROOT_PASSWORD: "rootpassword"
+      MARIADB_DATABASE: "otp2_week3"
+      #MYSQL_ROOT_PASSWORD: test1
+      #MYSQL_DATABASE: calc_data2
+      MARIADB_USER: "databaseuser"
+      MARIADB_PASSWORD: "password"
+
+    #test if database actually ready
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 5s
+      timeout: 20s
+      retries: 4
+
+
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql #remove this?
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql #sql file for db initialization
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro   #config file
+
+
+  application:
+    image: otp2_week3:latest
+    container_name: week3_application
+    depends_on:
+       datab:
+         condition: service_healthy
+
+
+    environment:
+      #for Xming display output
+      DISPLAY: host.docker.internal:0
+
+      DB_DRIVER: "jdbc:mariadb"
+      DB_HOST: datab
+      DB_PORT: "3306"
+      DB_NAME: "otp2_week3"
+      USER: "databaseuser"
+      PASSWORD: "password"
+
+    volumes:
+     - /tmp/.X11-unix:/tmp/.X11-unix  #remove this?
+
+
+volumes:
+  db_data:
+
+
+
+

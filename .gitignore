@@ -37,3 +37,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/week4_sonar/sonarToken.env

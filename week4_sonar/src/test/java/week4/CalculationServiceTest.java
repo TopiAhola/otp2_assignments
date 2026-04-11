@@ -1,0 +1,13 @@
+package week4;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculationServiceTest {
+
+    @Test
+    void saveCalculation() {
+        assertDoesNotThrow( ()-> CalculationService.saveCalculation(1,2,3,4,5,"en") );
+    }
+}
