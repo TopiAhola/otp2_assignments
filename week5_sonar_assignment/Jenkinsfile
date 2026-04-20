@@ -20,7 +20,7 @@ pipeline {
 
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN
-        SONAR_TOKEN = credentials('SONAR_TOKEN')
+        SONAR_TOKEN = 'SONAR_TOKEN'
 
 
     }
