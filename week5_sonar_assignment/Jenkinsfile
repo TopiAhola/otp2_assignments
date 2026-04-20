@@ -21,7 +21,7 @@ pipeline {
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN, SonarQubeScanner, SonarQubeServer
         SONAR_TOKEN = 'SONAR_TOKEN'
-
+        SONAR_QUBE_SERVER = 'SonarQubeServer'
 
     }
 
@@ -32,12 +32,12 @@ pipeline {
             }
         }
 
-        stage('test envs'){
-            steps{
+
+         stage('test envs'){
+            steps {
                 bat "echo ${WORKING_DIRECTORY}"
                 bat "echo ${SONAR_TOKEN}"
                 bat "echo ${env.SONAR_TOKEN}"
-
             }
         }
 
@@ -52,32 +52,34 @@ pipeline {
         }
 
 
-            //doenst work...
-       /*  stage('run SonarQubeScanner from cmd') {
-                    steps {
-                        bat """
-                        cd ${WORKING_DIRECTORY}
-                        sonar-scanner -D sonar.token=${SONAR_TOKEN}
-                        """
-                    }
-                } */
 
+       /*
+       //doenst work...
+       stage('run SonarQubeScanner from cmd') {
+            steps {
+                bat """
+                cd ${WORKING_DIRECTORY}
+                sonar-scanner -D sonar.token=${SONAR_TOKEN}
+                """
+            }
+       } */
 
-            stage('SonarQube Analysis with plugin tool?') {
-                steps {
-                    withSonarQubeEnv('SonarQubeServer') {
-                        bat """
-                            ${tool 'SonarQubeScanner'}\\bin\\sonar-scanner ^
-                            -Dsonar.projectKey=devops-demo ^
-                            -Dsonar.sources=src ^
-                            -Dsonar.projectName=DevOps-Demo ^
-                            -Dsonar.host.url=http://localhost:9000 ^
-                            -Dsonar.login=${SONAR_TOKEN} ^
-                            -Dsonar.java.binaries=target/classes
-                        """
-                    } /*aikaisemmin: -Dsonar.login=${env.SONAR_TOKEN} ^  */
+        /*aikaisemmin: -Dsonar.login=${env.SONAR_TOKEN} ^  */
+        stage('SonarQube Analysis with plugin tool?') {
+            steps {
+                withSonarQubeEnv('SonarQubeServer') {
+                    bat """
+                        ${tool 'SonarQubeScanner'}\\bin\\sonar-scanner ^
+                        -Dsonar.projectKey=devops-demo ^
+                        -Dsonar.sources=src ^
+                        -Dsonar.projectName=DevOps-Demo ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.login=${SONAR_TOKEN} ^
+                        -Dsonar.java.binaries=target/classes
+                    """
                 }
             }
+        }
 
 
         stage('Build Docker Image with .jar') {
