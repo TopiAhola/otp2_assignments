@@ -65,7 +65,7 @@ pipeline {
 
             stage('SonarQube Analysis with plugin tool?') {
                 steps {
-                    withSonarQubeEnv('SonarQubeScanner') {
+                    withSonarQubeEnv('Default') {
                         bat """
                             ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
                             -Dsonar.projectKey=devops-demo ^
