@@ -41,10 +41,10 @@ pipeline {
 
         stage('run SonarQubeScanner from cmd') {
                     steps {
-                        bat '''
-                        cd ./week4_sonar
+                        bat """
+                        cd ${WORKING_DIRECTORY}
                         sonar-scanner
-                        '''
+                        """
                     }
                 }
 
@@ -70,7 +70,7 @@ pipeline {
             steps {
                 //build from dockerfile
                 script {
-                    dir ('./week1_localization/') {
+                    dir ( "${WORKING_DIRECTORY}" ) {
                         docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                     }
                 }
