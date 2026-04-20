@@ -16,7 +16,7 @@ pipeline {
         PATH_TO_DOCKER_EXE = "path_to_docker_exe"
 
         //subdirectory in the repo
-        WORKING_DIRECTORY = "./week4_sonar"
+        WORKING_DIRECTORY = "./week5_sonar_assignment"
 
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN
