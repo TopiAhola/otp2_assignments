@@ -12,7 +12,7 @@ pipeline {
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
         DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
         DOCKERHUB_CREDENTIALS_ID = "dockerhub_pat"
-        DOCKER_IMAGE_TAG = "otp2_week3"
+        DOCKER_IMAGE_TAG = "otp2_week5"
         PATH_TO_DOCKER_EXE = "path_to_docker_exe"
 
         //subdirectory in the repo

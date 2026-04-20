@@ -36,7 +36,7 @@
     </dependencies>
 
     <build>
-        <finalName>week5</finalName>
+        <finalName>app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
