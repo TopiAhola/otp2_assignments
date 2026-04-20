@@ -19,7 +19,7 @@ pipeline {
         WORKING_DIRECTORY = "./week5_sonar_assignment"
 
         //secrets from local env
-        //SONAR_RUNNER_HOME, SONAR_TOKEN
+        //SONAR_RUNNER_HOME, SONAR_TOKEN, SonarQubeScanner, SonarQubeServer
         SONAR_TOKEN = 'SONAR_TOKEN'
 
 
@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-/        stage('test envs'){
+        stage('test envs'){
             steps{
                 bat "echo ${WORKING_DIRECTORY}"
                 bat "echo ${SONAR_TOKEN}"
@@ -65,9 +65,9 @@ pipeline {
 
             stage('SonarQube Analysis with plugin tool?') {
                 steps {
-                    withSonarQubeEnv('Default') {
+                    withSonarQubeEnv('SonarQubeServer') {
                         bat """
-                            ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                            ${tool 'SonarQubeScanner'}\\bin\\sonar-scanner ^
                             -Dsonar.projectKey=devops-demo ^
                             -Dsonar.sources=src ^
                             -Dsonar.projectName=DevOps-Demo ^
