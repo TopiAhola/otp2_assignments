@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Default'
+        git 'Default'
+    }
+
+    environment {
+
+        //docker variables
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
+        DOCKERHUB_CREDENTIALS_ID = "dockerhub_pat"
+        DOCKER_IMAGE_TAG = "otp2_week3"
+        PATH_TO_DOCKER_EXE = "path_to_docker_exe"
+
+        //subdirectory in the repo
+        WORKING_DIRECTORY = "./week4_sonar"
+
+        //secrets from local env
+        //SONAR_RUNNER_HOME, SONAR_TOKEN
+
+    }
+
+    stages {
+         stage('Checkout with git tool') {
+            steps {
+                git 'https://github.com/TopiAhola/otp2_assignments.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat """
+                cd ${WORKING_DIRECTORY}
+                mvn clean install
+                """
+            }
+        }
+
+        stage('run SonarQubeScanner from cmd') {
+                    steps {
+                        bat '''
+                        cd ./week4_sonar
+                        sonar-scanner
+                        '''
+                    }
+                }
+
+
+       /*     stage('SonarQube Analysis with plugin tool?') {
+                            steps {
+                                withSonarQubeEnv('SonarQubeServer') {
+                                    bat """
+                                        ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                                        -Dsonar.projectKey=devops-demo ^
+                                        -Dsonar.sources=src ^
+                                        -Dsonar.projectName=DevOps-Demo ^
+                                        -Dsonar.host.url=http://localhost:9000 ^
+                                        -Dsonar.login=${env.SONAR_TOKEN} ^
+                                        -Dsonar.java.binaries=target/classes
+                                    """
+                                }
+                            }
+                        } */
+
+
+        stage('Build Docker Image with .jar') {
+            steps {
+                //build from dockerfile
+                script {
+                    dir ('./week1_localization/') {
+                        docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    }
+                }
+            }
+        }
+
+        //docker push topiahola/jenkins_docker_repo:${DOCKER_IMAGE_TAG}
+         stage ('push docker image to dockerhub'){
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    }
+                }
+            }
+        }
+
+    }
+}
