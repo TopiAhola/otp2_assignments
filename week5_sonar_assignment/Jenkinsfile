@@ -52,20 +52,20 @@ pipeline {
         }
 
 
-
-        stage('run SonarQubeScanner from cmd') {
+            //doenst work...
+       /*  stage('run SonarQubeScanner from cmd') {
                     steps {
                         bat """
                         cd ${WORKING_DIRECTORY}
                         sonar-scanner -D sonar.token=${SONAR_TOKEN}
                         """
                     }
-                }
+                } */
 
 
-       /*     stage('SonarQube Analysis with plugin tool?') {
+            stage('SonarQube Analysis with plugin tool?') {
                             steps {
-                                withSonarQubeEnv('SonarQubeServer') {
+                                withSonarQubeEnv('SonarQubeScanner') {
                                     bat """
                                         ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
                                         -Dsonar.projectKey=devops-demo ^
@@ -77,7 +77,7 @@ pipeline {
                                     """
                                 }
                             }
-                        } */
+                        }
 
 
         stage('Build Docker Image with .jar') {
