@@ -43,7 +43,7 @@ pipeline {
                     steps {
                         bat """
                         cd ${WORKING_DIRECTORY}
-                        sonar-scanner
+                        sonar-scanner -D sonar.token=${SONAR_TOKEN}
                         """
                     }
                 }
