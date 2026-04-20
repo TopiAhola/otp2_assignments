@@ -11,7 +11,7 @@ pipeline {
         //docker variables
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
         DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
-        DOCKERHUB_CREDENTIALS_ID = "dockerhub_pat"
+        DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
         DOCKER_IMAGE_TAG = "otp2_week5"
         PATH_TO_DOCKER_EXE = "path_to_docker_exe"
 
@@ -20,7 +20,7 @@ pipeline {
 
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN, SonarQubeScanner, SonarQubeServer
-        SONAR_TOKEN = "SONAR_TOKEN"
+        //ei toimi SONAR_TOKEN = "SONAR_TOKEN"
         //SONAR_QUBE_SERVER = 'SonarQubeServer'
 
     }
@@ -32,6 +32,7 @@ pipeline {
             }
         }
 
+/*
 
          stage('test envs'){
             steps {
@@ -41,6 +42,9 @@ pipeline {
                 bat "echo ${SONAR_QUBE_SERVER}"
             }
         }
+ */
+
+
 
 
         stage('Build') {
