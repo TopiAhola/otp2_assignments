@@ -21,6 +21,7 @@ pipeline {
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN
 
+
     }
 
     stages {
@@ -30,6 +31,17 @@ pipeline {
             }
         }
 
+        stage('test envs'){
+            steps{
+                bat """
+                echo ${WORKING_DIRECTORY}
+                echo ${SONAR_TOKEN}
+                echo ${env.SONAR_TOKEN}
+                """
+            }
+        }
+
+
         stage('Build') {
             steps {
                 bat """
@@ -38,6 +50,8 @@ pipeline {
                 """
             }
         }
+
+
 
         stage('run SonarQubeScanner from cmd') {
                     steps {
