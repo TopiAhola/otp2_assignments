@@ -15,6 +15,26 @@
     </properties>
 
 
+    <dependencies>
+
+        <!--Junit testing dependency -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.13.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Jacoco dependency -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.14</version>
+        </dependency>
+
+
+    </dependencies>
+
     <build>
         <finalName>week5</finalName>
         <plugins>
