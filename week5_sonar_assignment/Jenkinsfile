@@ -33,11 +33,11 @@ pipeline {
 
         stage('test envs'){
             steps{
-                bat """
-                echo ${WORKING_DIRECTORY}
-                echo ${SONAR_TOKEN}
-                echo ${env.SONAR_TOKEN}
-                """
+
+                bat "echo ${WORKING_DIRECTORY}"
+                bat "echo ${SONAR_TOKEN}"
+                bat "echo ${env.SONAR_TOKEN}"
+
             }
         }
 
