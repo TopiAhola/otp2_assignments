@@ -51,4 +51,4 @@ RUN mvn clean package -DskipTests
 ##CMD ["java", "--module-path", "./javaFX_SDK/javafx-sdk-21/lib", "--add-modules", "javafx.base,javafx.controls,javafx.fxml,javafx.graphics", "-jar", "./target/week2_localization.jar"]
 # java --module-path "./javaFX_SDK/javafx-sdk-21/lib" "--add-modules" "javafx.fxml,javafx.graphics,javafx.controls,javafx.base" "-jar" ./target/week2_localization.jar
 
-CMD ["java", "--module-path", "./opt/javafx-sdk-21/lib", "--add-modules", "javafx.fxml,javafx.graphics,javafx.controls,javafx.base", "-jar", "./target/otp2_week3.jar"]
+CMD ["java", "--module-path", "./opt/javafx-sdk-21/lib", "--add-modules", "javafx.fxml,javafx.graphics,javafx.controls,javafx.base", "-jar", "./target/week5_sonar_assignment.jar"]
