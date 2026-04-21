@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DatabaseConnectionTest {
 
-    @Disabled
+    //@Disabled
     @Test
     void getConnection() {
         Connection c = DatabaseConnection.getConnection();
