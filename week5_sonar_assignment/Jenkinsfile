@@ -20,7 +20,7 @@ pipeline {
 
         //secrets from local env
         //SONAR_RUNNER_HOME, SONAR_TOKEN, SonarQubeScanner, SonarQubeServer
-        SONAR_TOKEN = 'SONAR_TOKEN'
+        SONAR_TOKEN = "SONAR_TOKEN"
         SONAR_QUBE_SERVER = 'SonarQubeServer'
 
 
