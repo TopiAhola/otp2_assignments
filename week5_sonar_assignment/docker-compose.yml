@@ -2,7 +2,7 @@ services:
 
   datab:
     image: mariadb:latest
-    container_name: week3_database
+    container_name: week5_database
     restart: always
 
     environment:
@@ -31,8 +31,8 @@ services:
 
 
   application:
-    image: otp2_week3:latest
-    container_name: week3_application
+    image: otp2_week5:latest
+    container_name: week5_application
     depends_on:
        datab:
          condition: service_healthy

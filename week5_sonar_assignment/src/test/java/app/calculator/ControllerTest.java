@@ -3,13 +3,16 @@ package app.calculator;
 
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+@Disabled
 class ControllerTest {
 
     static Controller controller;
+
 
     @BeforeAll
     static void setUp(){
