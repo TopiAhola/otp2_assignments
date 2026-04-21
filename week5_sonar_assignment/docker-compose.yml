@@ -31,7 +31,7 @@ services:
 
 
   application:
-    image: otp2_week5:latest
+    image: topiahola/jenkins_docker_repo:otp2_week5 #otp2_week5:latest  #tai: topiahola/jenkins_docker_repo:otp2_week5
     container_name: week5_application
     depends_on:
        datab:

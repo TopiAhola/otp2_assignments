@@ -1,0 +1,128 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Default'
+        git 'Default'
+    }
+
+    environment {
+
+        //docker variables
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        DOCKERHUB_REPO = "topiahola/jenkins_docker_repo"
+        DOCKERHUB_CREDENTIALS_ID = "dockehub_pat"
+        DOCKER_IMAGE_TAG = "otp2_week5"
+        PATH_TO_DOCKER_EXE = "path_to_docker_exe"
+
+        //subdirectory in the repo
+        WORKING_DIRECTORY = "./week5_sonar_assignment"
+
+        //secrets from local env
+        //SONAR_RUNNER_HOME, SONAR_TOKEN, SonarQubeScanner, SonarQubeServer
+        SONAR_TOKEN = "sonar token here"
+        SONAR_QUBE_SERVER = 'SonarQubeServer'
+
+        //envs for database
+          DB_DRIVER="jdbc:mariadb"
+          DB_HOST="localhost"
+          DB_PORT="3306"
+          DB_NAME="otp2_week3"
+          USER=""
+          PASSWORD=""
+    }
+
+    stages {
+         stage('Checkout with git tool') {
+            steps {
+                git 'https://github.com/TopiAhola/otp2_assignments.git'
+            }
+        }
+
+/*
+
+         stage('test envs'){
+            steps {
+                bat "echo ${WORKING_DIRECTORY}"
+                bat "echo ${SONAR_TOKEN}"
+                bat "echo ${env.SONAR_TOKEN}"
+                bat "echo ${SONAR_QUBE_SERVER}"
+            }
+        }
+ */
+
+
+
+
+        stage('Build') {
+            steps {
+                bat """
+                cd ${WORKING_DIRECTORY}
+                mvn clean install
+                """
+            }
+        }
+
+
+
+       /*
+       //doenst work...
+       stage('run SonarQubeScanner from cmd') {
+            steps {
+                bat """
+                cd ${WORKING_DIRECTORY}
+                sonar-scanner -D sonar.token=${SONAR_TOKEN}
+                """
+            }
+       } */
+
+        /*aikaisemmin: -Dsonar.login=${env.SONAR_TOKEN} ^  */
+        stage('SonarQube Analysis with plugin tool?') {
+            steps {
+                withSonarQubeEnv('SonarQubeServer') {
+                    bat """
+                        cd ${env.WORKING_DIRECTORY}
+                        ${tool 'SonarQubeScanner'}\\bin\\sonar-scanner ^
+                        -Dsonar.projectKey=week5 ^
+                        -Dsonar.projectName=week5 ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.token=${env.SONAR_TOKEN} ^
+                        -Dsonar.sources=./src/main ^
+                        -Dsonar.java.binaries=./target/classes ^
+                        -Dsonar.tests=./src/test ^
+                        -Dsonar.coverage.exclusions="**/test/**, **/Main.java, **/Controller.java, **/View.java, **/docker-compose.yml"
+                    """
+
+
+
+
+
+                }
+            }
+        }
+
+
+        stage('Build Docker Image with .jar') {
+            steps {
+                //build from dockerfile
+                script {
+                    dir ( "${WORKING_DIRECTORY}" ) {
+                        docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    }
+                }
+            }
+        }
+
+        //docker push topiahola/jenkins_docker_repo:${DOCKER_IMAGE_TAG}
+         stage ('push docker image to dockerhub'){
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    }
+                }
+            }
+        }
+
+    }
+}
