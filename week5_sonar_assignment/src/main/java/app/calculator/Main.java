@@ -1,6 +1,5 @@
 package app.calculator;
 
-import app.calculator.View;
 import javafx.application.Application;
 
 public class Main {
